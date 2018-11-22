@@ -25,11 +25,24 @@ io.on('connection',function(socket){
     socket.on('status added',function(status){
       add_status(status,function(res){
         if(res){
-            io.emit('refresh feed',status);
+            pool.query('SELECT * FROM status',function(err,rows){
+                if(err) throw err;
+                console.log('Data received from Db:\n');
+                //console.log(rows);
+                io.emit('refresh feed',rows);
+            });
         } else {
             io.emit('error');
         }
       });
+    });
+    socket.on('get status',function(status){
+        pool.query('SELECT * FROM status',function(err,rows){
+            if(err) throw err;
+            console.log('Data received from Db:\n');
+            //console.log(rows);
+            socket.emit('get status', rows);
+        });
     });
 });
 

@@ -8,11 +8,27 @@
     <script>
     $(document).ready(function(){
           var socket = io();
+          //get status on load 
+          socket.emit('get status');
+          socket.on('get status', function(rows) {
+            var html='';
+            for (var i=0; i<rows.length; i++) {
+              html += rows[i].status_id + ' ' + rows[i].s_text + '<br>';
+            }  
+            document.getElementById("show_comments").innerHTML = html;
+            console.log(rows);
+          });
+
           $("#add_status").click(function(){
             socket.emit('status added',$("#comment").val());
           });
           socket.on('refresh feed',function(msg){
-            $("#show_comments").append(msg + '<br /><br />');
+            var html='';
+            for (var i=0; i<msg.length; i++) {
+              html += msg[i].status_id + ' ' + msg[i].s_text + '<br>';
+            }  
+            document.getElementById("show_comments").innerHTML = html;
+            //$("#show_comments").append(msg + '<br /><br />');
           });
     });
     </script>
