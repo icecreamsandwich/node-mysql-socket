@@ -7,17 +7,13 @@
 - Run `npm install` to install dependencies.
 
 - Create the database and table in mysql 
-
-create database `fbstatus`
---
--- Table structure for table `status`
---
-
+    
+`create database `fbstatus`
 CREATE TABLE IF NOT EXISTS `status` (
   `status_id` int(30) NOT NULL AUTO_INCREMENT,
   `s_text` text NOT NULL,
   `t_status` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;`
     
 - Visit `localhost:3000` to view the app.
